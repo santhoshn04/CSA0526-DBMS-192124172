@@ -13,3 +13,5 @@
 # [sql_queries](https://github.com/santhoshn04/CSA0526-DBMS-192124172/blob/main/santhosh%20exp%20(6).txt)
 # EXP_7
 # [sql_queries](https://github.com/santhoshn04/CSA0526-DBMS-192124172/blob/main/santhosh%20exp%20(7).txt)
+# EXP_8
+# [sql_queries](https://github.com/santhoshn04/CSA0526-DBMS-192124172/blob/main/santhosh%20exp(8).txt)
