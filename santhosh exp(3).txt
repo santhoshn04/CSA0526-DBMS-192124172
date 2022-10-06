@@ -1,0 +1,65 @@
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 26
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use db;
+Database changed
+mysql> descdesc faculty;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'descdesc faculty' at line 1
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| facno    | varchar(4)  | YES  |     | NULL    |       |
+| facname  | varchar(15) | NO   | PRI |         |       |
+| gender   | char(1)     | YES  |     | NULL    |       |
+| dob      | date        | YES  | UNI | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
+| year     | int(10)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> insert into faculty VALUES(7,'ajay','M','1990/01/07','7878765898',3),(2,'raja','M','1988/06/17','9876543210',4),(5,'priya','F','1995/02/16','6364578912',2);
+ERROR 1264 (22003): Out of range value for column 'mobileno' at row 1
+mysql>  insert into faculty VALUES(7,'ajay','M','1990/01/07','65898',3),(2,'raja','M','1988/06/17','43210',4),(5,'priya','F','1995/02/16','63572',2);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT*FROM faculty;
++-------+---------+--------+------------+----------+------+
+| facno | facname | gender | dob        | mobileno | year |
++-------+---------+--------+------------+----------+------+
+| 7     | ajay    | M      | 1990-01-07 |    65898 |    3 |
+| 5     | priya   | F      | 1995-02-16 |    63572 |    2 |
+| 2     | raja    | M      | 1988-06-17 |    43210 |    4 |
++-------+---------+--------+------------+----------+------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT facno from faculty;
++-------+
+| facno |
++-------+
+| 7     |
+| 5     |
+| 2     |
++-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT*FROM faculty WHERE facname='ajay';
++-------+---------+--------+------------+----------+------+
+| facno | facname | gender | dob        | mobileno | year |
++-------+---------+--------+------------+----------+------+
+| 7     | ajay    | M      | 1990-01-07 |    65898 |    3 |
++-------+---------+--------+------------+----------+------+
+1 row in set (0.03 sec)
+
+mysql>
