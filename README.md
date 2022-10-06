@@ -5,3 +5,5 @@
 # [sql_queries](https://github.com/santhoshn04/CSA0526-DBMS-192124172/blob/main/santhosh%20exp%20(2).txt)
 # EXP_3
 # [sql_queries](https://github.com/santhoshn04/CSA0526-DBMS-192124172/blob/main/santhosh%20exp(3).txt)
+# EXP_4
+# [sql_queries](https://github.com/santhoshn04/CSA0526-DBMS-192124172/blob/main/santhosh%20exp%20(4).txt)
