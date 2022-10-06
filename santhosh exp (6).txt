@@ -1,0 +1,70 @@
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use db;
+Database changed
+mysql> select * from faculty;
++-------+---------+--------+------------+----------+------+
+| facno | facname | gender | dob        | mobileno | year |
++-------+---------+--------+------------+----------+------+
+| 7     | ajay    | M      | 1990-01-07 |    65898 |    2 |
+| 6     | bharath | M      | 1987-05-05 |    54321 |    8 |
+| 1     | prasana | M      | 1993-09-12 |    67890 |    5 |
+| 2     | raja    | M      | 1988-06-17 |    43210 |    4 |
+| 4     | Tinu    | M      | 1989-05-03 |    76768 |    5 |
++-------+---------+--------+------------+----------+------+
+5 rows in set (0.03 sec)
+
+mysql> select * from faculty
+    -> where facname IN('ajay','tinu');
++-------+---------+--------+------------+----------+------+
+| facno | facname | gender | dob        | mobileno | year |
++-------+---------+--------+------------+----------+------+
+| 7     | ajay    | M      | 1990-01-07 |    65898 |    2 |
+| 4     | Tinu    | M      | 1989-05-03 |    76768 |    5 |
++-------+---------+--------+------------+----------+------+
+2 rows in set (0.01 sec)
+
+mysql> select * from faculty
+    -> where subject BETWEEN'Bharath' AND 'raja';
+ERROR 1054 (42S22): Unknown column 'subject' in 'where clause'
+mysql> select * from faculty
+    -> where facname BETWEEN 'bharath' AND 'raja';
++-------+---------+--------+------------+----------+------+
+| facno | facname | gender | dob        | mobileno | year |
++-------+---------+--------+------------+----------+------+
+| 6     | bharath | M      | 1987-05-05 |    54321 |    8 |
+| 1     | prasana | M      | 1993-09-12 |    67890 |    5 |
+| 2     | raja    | M      | 1988-06-17 |    43210 |    4 |
++-------+---------+--------+------------+----------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from faculty
+    -> where facname NOT BETWEEN 'prasana' AND 'Tinu';
++-------+---------+--------+------------+----------+------+
+| facno | facname | gender | dob        | mobileno | year |
++-------+---------+--------+------------+----------+------+
+| 7     | ajay    | M      | 1990-01-07 |    65898 |    2 |
+| 6     | bharath | M      | 1987-05-05 |    54321 |    8 |
++-------+---------+--------+------------+----------+------+
+2 rows in set (0.00 sec)
+
+mysql> select count(facname) from faculty;
++----------------+
+| count(facname) |
++----------------+
+|              5 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql>
