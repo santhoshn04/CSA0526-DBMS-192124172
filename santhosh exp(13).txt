@@ -1,0 +1,136 @@
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 19
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use db
+Database changed
+mysql> create table  movies(sn0 int(3),moviename varchar(30),type varchar(15));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into movies values(1,"vikram","comercial");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into movies values(2,"diary","crime thriller");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into movies values(3,"nanae varuvan","crime thriller");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into movies values(4,"hostel","comedy");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from movies;
++------+---------------+----------------+
+| sn0  | moviename     | type           |
++------+---------------+----------------+
+|    1 | vikram        | comercial      |
+|    2 | diary         | crime thriller |
+|    3 | nanae varuvan | crime thriller |
+|    4 | hostel        | comedy         |
++------+---------------+----------------+
+4 rows in set (0.02 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> savepoint ini;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into movies values(5,"varisu","commercial");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from movies
+    -> select * from movies;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select * from movies' at line 2
+mysql> select * from movies;
++------+---------------+----------------+
+| sn0  | moviename     | type           |
++------+---------------+----------------+
+|    1 | vikram        | comercial      |
+|    2 | diary         | crime thriller |
+|    3 | nanae varuvan | crime thriller |
+|    4 | hostel        | comedy         |
+|    5 | varisu        | commercial     |
++------+---------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> savepoint ins;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update movies set moviename="love today"where sno=4;
+ERROR 1054 (42S22): Unknown column 'sno' in 'where clause'
+mysql> update movies set moviename="love today"where sn0=4;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from movies;
++------+---------------+----------------+
+| sn0  | moviename     | type           |
++------+---------------+----------------+
+|    1 | vikram        | comercial      |
+|    2 | diary         | crime thriller |
+|    3 | nanae varuvan | crime thriller |
+|    4 | love today    | comedy         |
+|    5 | varisu        | commercial     |
++------+---------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> savepoint upd;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from movies where sn0=2;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from movies;
++------+---------------+----------------+
+| sn0  | moviename     | type           |
++------+---------------+----------------+
+|    1 | vikram        | comercial      |
+|    3 | nanae varuvan | crime thriller |
+|    4 | love today    | comedy         |
+|    5 | varisu        | commercial     |
++------+---------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> savepoint del;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> rollback to upd;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from movies;
++------+---------------+----------------+
+| sn0  | moviename     | type           |
++------+---------------+----------------+
+|    1 | vikram        | comercial      |
+|    2 | diary         | crime thriller |
+|    3 | nanae varuvan | crime thriller |
+|    4 | love today    | comedy         |
+|    5 | varisu        | commercial     |
++------+---------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> rollback to ini;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from movies;
++------+---------------+----------------+
+| sn0  | moviename     | type           |
++------+---------------+----------------+
+|    1 | vikram        | comercial      |
+|    2 | diary         | crime thriller |
+|    3 | nanae varuvan | crime thriller |
+|    4 | hostel        | comedy         |
++------+---------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql>

@@ -1,0 +1,94 @@
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 20
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use db
+Database changed
+mysql> show tables;
++--------------+
+| Tables_in_db |
++--------------+
+| emoployee    |
+| facname_view |
+| faculty      |
+| movies       |
+| red          |
+| student      |
++--------------+
+6 rows in set (0.03 sec)
+
+mysql> desc faculty;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| facno    | varchar(4)  | YES  |     | NULL    |       |
+| facname  | varchar(15) | NO   | PRI |         |       |
+| gender   | char(1)     | YES  | MUL | NULL    |       |
+| dob      | date        | YES  | UNI | NULL    |       |
+| mobileno | int(10)     | YES  |     | NULL    |       |
+| year     | int(10)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> create user santhosh;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> grant all on faculty to santhosh;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show grants for santhosh;
++----------------------------------------------------------+
+| Grants for santhosh@%                                    |
++----------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'santhosh'@'%'                     |
+| GRANT ALL PRIVILEGES ON `db`.`faculty` TO 'santhosh'@'%' |
++----------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> revoke all on faculty from santhosh;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for santhosh;
++--------------------------------------+
+| Grants for santhosh@%                |
++--------------------------------------+
+| GRANT USAGE ON *.* TO 'santhosh'@'%' |
++--------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> grant select,update on persons to santhosh;
+ERROR 1146 (42S02): Table 'db.persons' doesn't exist
+mysql> grant select,update on student to santhosh;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for santhosh;
++----------------------------------------------------------+
+| Grants for santhosh@%                                    |
++----------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'santhosh'@'%'                     |
+| GRANT SELECT, UPDATE ON `db`.`student` TO 'santhosh'@'%' |
++----------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> revoke update on student from santhosh;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for santhosh;
++--------------------------------------------------+
+| Grants for santhosh@%                            |
++--------------------------------------------------+
+| GRANT USAGE ON *.* TO 'santhosh'@'%'             |
+| GRANT SELECT ON `db`.`student` TO 'santhosh'@'%' |
++--------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql>
