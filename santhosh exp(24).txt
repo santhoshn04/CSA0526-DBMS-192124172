@@ -1,0 +1,79 @@
+mysql> use gh
+Database changed
+mysql> create table car(name char(30),model int(30),mileage int(30),cost int(30));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into car values('mercedez_benz',2017,11,7000000),('audi',2018,10,4500000),('bmw',2019,12,8700000),('jaguar',2020,10,5600000);
+Query OK, 4 rows affected (0.04 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select*from car;
++---------------+-------+---------+---------+
+| name          | model | mileage | cost    |
++---------------+-------+---------+---------+
+| mercedez_benz |  2017 |      11 | 7000000 |
+| audi          |  2018 |      10 | 4500000 |
+| bmw           |  2019 |      12 | 8700000 |
+| jaguar        |  2020 |      10 | 5600000 |
++---------------+-------+---------+---------+
+4 rows in set (0.00 sec)
+
+mysql> update car set name='porsche' where model=2018;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> create table company(comp_name char(30),no_of_cars char(30),phone_no int(30));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> insert into company  values('tata_motors',1345,67678345),('hyundai',1222,987453210),('skoda',1234,765763);
+Query OK, 3 rows affected (0.04 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> delete from company where no_of_cars=1222;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select max(cost) from car;
++-----------+
+| max(cost) |
++-----------+
+|   8700000 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> alter table car add primary key(model);
+Query OK, 4 rows affected (0.05 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> desc car;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| name    | char(30) | YES  |     | NULL    |       |
+| model   | int(30)  | NO   | PRI | 0       |       |
+| mileage | int(30)  | YES  |     | NULL    |       |
+| cost    | int(30)  | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+4 rows in set (0.05 sec)
+
+mysql> create view cost as select*from car where cost>4500000;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select*from cost;
++---------------+-------+---------+---------+
+| name          | model | mileage | cost    |
++---------------+-------+---------+---------+
+| mercedez_benz |  2017 |      11 | 7000000 |
+| bmw           |  2019 |      12 | 8700000 |
+| jaguar        |  2020 |      10 | 5600000 |
++---------------+-------+---------+---------+
+3 rows in set (0.04 sec)
+
+mysql> select*from car group by mileage;
++---------------+-------+---------+---------+
+| name          | model | mileage | cost    |
++---------------+-------+---------+---------+
+| porsche       |  2018 |      10 | 4500000 |
+| mercedez_benz |  2017 |      11 | 7000000 |
+| bmw           |  2019 |      12 | 8700000 |
++---------------+-------+---------+---------+
+3 rows in set (0.00 sec)
